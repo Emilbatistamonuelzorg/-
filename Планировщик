@@ -1,1 +1,266 @@
 
+```cpp
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+    string destination;
+    string departureDate;
+    string returnDate;
+    
+    cout << "Enter your desired travel destination: ";
+    getline(cin, destination);
+    
+    cout << "Enter your departure date (YYYY-MM-DD): ";
+    getline(cin, departureDate);
+    
+    cout << "Enter your return date (YYYY-MM-DD): ";
+    getline(cin, returnDate);
+    
+    cout << "You want to travel to " << destination << " from " << departureDate << " to " << returnDate << endl;
+    
+    return 0;
+}
+```
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+struct Place
+{
+    string name;
+    int distance;   // расстояние до места в км
+    int duration;   // время в пути в минутах
+};
+
+int main()
+{
+    vector<Place> places = {
+        {"Hotel A", 10, 15},
+        {"Restaurant B", 5, 10},
+        {"Museum C", 12, 20},
+        {"Beach D", 20, 30}
+    };
+    
+    // вывод списка мест
+    cout << "List of places to visit:" << endl;
+    for (int i = 0; i < places.size(); i++)
+    {
+        cout << i + 1 << ". " << places[i].name << endl;
+    }
+    
+    // выбор мест для посещения
+    vector<int> selectedPlaces;
+    int input;
+    do
+    {
+        cout << "Enter the number of a place to add it to your itinerary (0 to end): ";
+        cin >> input;
+        if (input >= 1 && input <= places.size())
+        {
+            selectedPlaces.push_back(input - 1);
+        }
+    } while (input > 0);
+    
+    // вывод выбранных мест
+    cout << "Your itinerary:" << endl;
+    for (int i = 0; i < selectedPlaces.size(); i++)
+    {
+        cout << places[selectedPlaces[i]].name << endl;
+    }
+    
+    // оценка расстояния и времени путешествия
+    int distance = 0;
+    int duration = 0;
+    for (int i = 0; i < selectedPlaces.size() - 1; i++)
+    {
+        distance += places[selectedPlaces[i]].distance;
+        duration += places[selectedPlaces[i]].duration;
+    }
+    cout << "Total distance: " << distance << " km" << endl;
+    cout << "Total duration: " << duration << " min" << endl;
+    
+    return 0;
+}
+`
+
+```cpp
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+struct Transport
+{
+    string type;
+    int price;
+    string websiteLink;
+};
+
+int main()
+{
+    Transport car{"Car", 1500, "carrental.com"};
+    Transport plane{"Plane", 5000, "airlines.com"};
+    Transport train{"Train", 1000, "railways.com"};
+
+    // Запрашиваем желаемый вид транспорта у пользователя
+    string transportChoice;
+    cout << "What transportation do you prefer: 'Car', 'Plane', or 'Train'? ";
+    cin >> transportChoice;
+
+    // Выводим информацию об выбранном транспорте
+    if (transportChoice == "Car")
+    {
+        cout << "You chose a Car!" << endl;
+        cout << "The price is " << car.price << " rubles." << endl;
+        cout << "You can rent it from " << car.websiteLink << endl;
+    }
+    else if (transportChoice == "Plane")
+    {
+        cout << "You chose a Plane!" << endl;
+        cout << "The price is " << plane.price << " rubles." << endl;
+        cout << "You can buy a ticket from " << plane.websiteLink << endl;
+    }
+    else if (transportChoice == "Train")
+    {
+        cout << "You chose a Train!" << endl;
+        cout << "The price is " << train.price << " rubles." << endl;
+        cout << "You can buy a ticket from " << train.websiteLink << endl;
+    }
+    else
+    {
+        cout << "Invalid choice of transportation. Please choose between 'Car', 'Plane', or 'Train'." << endl;
+    }
+
+    return 0;
+}
+```
+
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+struct Expense
+{
+    string name;
+    int amount;
+};
+
+int main()
+{
+    // Запрашиваем бюджет у пользователя
+    int budget;
+    cout << "Enter your budget: ";
+    cin >> budget;
+
+    // Создаем пустой вектор для хранения расходов
+    vector<Expense> expenses;
+
+    // Запрашиваем у пользователя расходы
+    string expenseName;
+    int expenseAmount;
+    char choice;
+    do
+    {
+        cout << "Enter your expense name: ";
+        cin >> expenseName;
+        cout << "Enter your expense amount: ";
+        cin >> expenseAmount;
+
+        // Добавляем расход в вектор
+        expenses.push_back({expenseName, expenseAmount});
+
+        cout << "Do you want to add another expense? (y/n) ";
+        cin >> choice;
+    } while (choice == 'y');
+
+    // Выводим общие расходы
+    int totalExpenses = 0;
+    for (int i = 0; i < expenses.size(); i++)
+    {
+        totalExpenses += expenses[i].amount;
+    }
+    cout << "Your total expenses are: " << totalExpenses << endl;
+
+    // Выводим текущий остаток бюджета
+    int remainingBudget = budget - totalExpenses;
+    cout << "Your remaining budget is: " << remainingBudget << endl;
+
+    return 0;
+}
+...
+
+
+```cpp
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+struct Place
+{
+    string name;
+};
+
+int main()
+{
+    // Создаем вектор выбранных мест пользователем
+    vector<Place> selectedPlaces = {
+        {"Hotel A"},
+        {"Restaurant B"},
+        {"Museum C"}
+    };
+
+    // Выводим выбранные места путешествия
+    cout << "Your selected places are:" << endl;
+    for (int i = 0; i < selectedPlaces.size(); i++)
+    {
+        cout << i + 1 << ". " << selectedPlaces[i].name << endl;
+    }
+
+    // Создаем вектор друзей, с которыми можно поделиться планом
+    vector<string> friends = {"Alice", "Bob", "Charlie"};
+
+    // Запрашиваем у пользователя, с кем он хочет поделиться планом
+    cout << "Which friend do you want to share your plan with? ";
+    string friendName;
+    cin >> friendName;
+
+    // Проверяем, есть ли данный друг в списке и выводим сообщение для него
+    bool found = false;
+    for (int i = 0; i < friends.size(); i++)
+    {
+        if (friends[i] == friendName)
+        {
+            found = true;
+            cout << friendName << ", here is my itinerary:" << endl;
+            for (int j = 0; j < selectedPlaces.size(); j++)
+            {
+                cout << j + 1 << ". " << selectedPlaces[j].name << endl;
+            }
+        }
+    }
+
+    // Выводим сообщение об ошибке, если друг не найден
+    if (!found)
+    {
+        cout << "Sorry, your desired friend is not on your list." << endl;
+    }
+
+    return 0;
+}
+...
+
+отмечу, что это только пример, и вы можете расширять и изменять его в соответствии с вашими требованиями и идеями.
+```
